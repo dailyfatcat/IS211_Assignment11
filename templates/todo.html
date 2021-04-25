@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Todo App</title>
+</head>
+<body>
+
+<table width="600px" border="1">
+    <tr>
+        <td width="200px"><b>Task</b></td>
+        <td width="200px"><b>Email</b></td>
+        <td width="200px"><b>Priority</b></td>
+        <td width="200px"><b>Delete Item</b></td>
+    </tr>
+    {% for task in todo_list %}
+    <tr>
+        <td width="200px">{{ task[0] }}</td>
+        <td width="200px">{{ task[1] }}</td>
+        <td width="200px">{{ task[2] }}</td>
+        <td width="200px"><form method="post" action="/delete">
+            <input type="hidden" name="Task" value="{{ task[0] }}"/>
+            <input type="hidden" name="Email" value="{{ task[1] }}"/>
+            <input type="hidden" name="Priority" value="{{ task[2] }}"/>
+            <input type="submit" name="Delete" value="Delete"/>
+        </form></td>
+    </tr>
+    {% endfor %}
+</table>
+
+<br>
+<br>
+
+<form action="/submit" width="400" method="post">
+    <table>
+        <tr>
+            <td width="100">Task:</td>
+            <td width="300"><input type="text" name="task"></td>
+        </tr>
+        <tr>
+            <td width="100">Email:</td>
+            <td width="300"><input type="text" name="email"></td>
+        </tr>
+        <tr>
+            <td width="100">Priority:</td>
+            <td width="300">
+                <select name="priority">
+                    <option value="High" selected>High</option>
+                    <option value="Medium">Medium</option>
+                    <option value="Low">Low</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td rowspan="2"><input type="submit" value="Add Todo Item"></td>
+        </tr>
+    </table>
+</form>
+<form action="/clear" width="200" method="post">
+    <input type="submit" value="Clear">
+
+
+</form>
+
+</body>
+</html>
